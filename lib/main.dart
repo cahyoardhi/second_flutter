@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 
 /* Author : Gagah GK
-  Co-Author : Cahyo Ardhi Copas Doang
+  Co-Author : Cahyo Ardhi Copas lagi
 */
   void main() => runApp(MoviesApp());
 
@@ -31,6 +31,9 @@ class _HomeState extends State<Home> {
 
 ApiProvider provider = ApiProvider();
 Future<PopularMovies> popularMovies;
+
+String imageBaseUrl = 'https://image.tmdb.org/t/p/w500'; //sementara
+
 @override
   void initState() {
     
@@ -57,7 +60,12 @@ Future<PopularMovies> popularMovies;
           builder: (BuildContext context , AsyncSnapshot snapshot)  {
             if (snapshot.hasData){
               print('Has Data : {$snapshot.hasData}');
-              return moviesItem();
+              return moviesItem(
+                poster: '$imageBaseUrl${snapshot.data.results[3].posterPath}',
+                title: '${snapshot.data.results[3].title}',
+                date: '${snapshot.data.results[3].releaseDate}',
+                voteAverage: '${snapshot.data.results[3].voteAverage}'
+              );
             }
             else if (snapshot.hasError){
               print('Has Data : {$snapshot.hasError}');
@@ -72,7 +80,11 @@ Future<PopularMovies> popularMovies;
       );
     }
 
-    Container moviesItem() {
+    Container moviesItem({
+      String poster, 
+      String title, 
+      String date,
+      String voteAverage}) {
       return Container(
         child: Card(
           margin: EdgeInsets.all(10),
@@ -83,7 +95,7 @@ Future<PopularMovies> popularMovies;
                 Container(
                   width: 100,
                   child: CachedNetworkImage(
-                    imageUrl: 'https://image.tmdb.org/t/p/w600_and_h900_bestv2/hj8pyoNnynGeJTAbl7jcLZO8Uhx.jpg',
+                    imageUrl: poster,
                   ),
                 ),
                 SizedBox(       //Pake SizedBox soalnya di Row
@@ -98,8 +110,8 @@ Future<PopularMovies> popularMovies;
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Text('Midway', 
-                        style: TextStyle(
+                      Text(title, 
+                          style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
                           ),
@@ -116,7 +128,7 @@ Future<PopularMovies> popularMovies;
                           SizedBox(
                             width: 5,
                             ),
-                          Text('12-12-2020'),
+                          Text(date),
                         ],
                       ),
                       SizedBox(
@@ -131,7 +143,7 @@ Future<PopularMovies> popularMovies;
                           SizedBox(
                             width: 5, //Jarak Icon sama Text Rating
                             ),
-                          Text('9.2'),
+                          Text(voteAverage),
                         ],
                       ),
                     ],
