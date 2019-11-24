@@ -3,7 +3,6 @@ import 'package:second_flutter/model/popular_movies.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-
 /* Author : Gagah GK
   Co-Author : Cahyo Ardhi Copas Doang
 */
@@ -22,7 +21,7 @@ import 'package:flutter/material.dart';
     }
   }
 
-  class Home extends StatefulWidget {
+  class Home extends StatefulWidget { 
   @override
   _HomeState createState() => _HomeState();
 }
@@ -69,7 +68,13 @@ String imageBaseUrl = 'https://image.tmdb.org/t/p/w500'; //sementara
                     date: '${snapshot.data.results[index].releaseDate}',
                     voteAverage: '${snapshot.data.results[index].voteAverage}',
                     onTap: () {
-                      
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context)=>MovieDetail(
+                            movie: snapshot.data.results[index] //bawa index movie yang di tap
+                          ) //MaterialPageRoute
+                        )
+                      ); //layering halaman baru makanya di push
                     }
                   );
                 },
@@ -93,7 +98,7 @@ String imageBaseUrl = 'https://image.tmdb.org/t/p/w500'; //sementara
       String title, 
       String date,
       String voteAverage,
-      Function onTap}) {
+      Function onTap}) {  //biar movie nya bisa di tap
       return InkWell(
         onTap:onTap,
               child: Container(
@@ -172,14 +177,19 @@ String imageBaseUrl = 'https://image.tmdb.org/t/p/w500'; //sementara
 }
 
 class MovieDetail extends StatelessWidget {
+
+  final Results movie; //variable konstan
+
+  const MovieDetail({Key key, this.movie}) : super(key: key); 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(    //Return untuk halaman baru pake scaffold
       appBar: AppBar(
-        title: Text('Movie Detail'),
+        title: Text(movie.title),
       ),
       body: Container(
-        child: Text('Detail'),
+        child: Text(movie.overview),
       ),
     );
   }
