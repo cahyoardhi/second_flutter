@@ -1,11 +1,11 @@
-import 'package:app_movies/data/api_provider.dart';
-import 'package:app_movies/model/popular_movies.dart';
+import 'package:second_flutter/data/api_provider.dart';
+import 'package:second_flutter/model/popular_movies.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 
 /* Author : Gagah GK
-  Co-Author : Cahyo Ardhi Copas lagi
+  Co-Author : Cahyo Ardhi Copas Doang
 */
   void main() => runApp(MoviesApp());
 
@@ -60,11 +60,16 @@ String imageBaseUrl = 'https://image.tmdb.org/t/p/w500'; //sementara
           builder: (BuildContext context , AsyncSnapshot snapshot)  {
             if (snapshot.hasData){
               print('Has Data : {$snapshot.hasData}');
-              return moviesItem(
-                poster: '$imageBaseUrl${snapshot.data.results[3].posterPath}',
-                title: '${snapshot.data.results[3].title}',
-                date: '${snapshot.data.results[3].releaseDate}',
-                voteAverage: '${snapshot.data.results[3].voteAverage}'
+              return ListView.builder(
+                itemCount   : snapshot.data.results.length,       //Banyak Film
+                itemBuilder : (BuildContext context,int index){   //Looping sebanyak index -> banyak film
+                  return moviesItem(
+                    poster: '$imageBaseUrl${snapshot.data.results[index].posterPath}',
+                    title: '${snapshot.data.results[index].title}',
+                    date: '${snapshot.data.results[index].releaseDate}',
+                    voteAverage: '${snapshot.data.results[index].voteAverage}'
+                  );
+                },
               );
             }
             else if (snapshot.hasError){
