@@ -27,6 +27,8 @@ class Home extends StatelessWidget {
         margin: EdgeInsets.all(10),
         child: Container(
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment
+                .start, //crossaxis soalnya di row pengen pindahin sumbu y biar ketengah
             children: <Widget>[
               Container(
                 width: 100,
@@ -36,16 +38,55 @@ class Home extends StatelessWidget {
                 ),
               ),
               SizedBox(
+                //Pake SizedBox soalnya di Row
                 width: 10,
               ),
               Container(
-                color: Colors.lightGreen,
+                margin: EdgeInsets.only(
+                  top: 20,
+                ),
+                //color: Colors.lightBlueAccent,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Text('Midway'),
-                    Text('12-12-2020'),
-                    Text('9.2'),
+                    Text(
+                      'Midway',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.calendar_today,
+                          size: 15,
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text('12-12-2020'),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Icon(
+                          Icons.star,
+                          size: 15,
+                        ),
+                        Text('9.2'),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
                   ],
                 ),
               )
