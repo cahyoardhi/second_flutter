@@ -1,4 +1,4 @@
-name: second_flutter
+name: app_movies
 description: A new Flutter project.
 
 # The following defines the version and build number for your application.
@@ -25,6 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
 
   cached_network_image:
+
   http:
 
 dev_dependencies:

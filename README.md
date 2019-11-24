@@ -1,4 +1,4 @@
-# second_flutter
+# app_movies
 
 A new Flutter project.
 
