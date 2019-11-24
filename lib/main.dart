@@ -67,7 +67,10 @@ String imageBaseUrl = 'https://image.tmdb.org/t/p/w500'; //sementara
                     poster: '$imageBaseUrl${snapshot.data.results[index].posterPath}',
                     title: '${snapshot.data.results[index].title}',
                     date: '${snapshot.data.results[index].releaseDate}',
-                    voteAverage: '${snapshot.data.results[index].voteAverage}'
+                    voteAverage: '${snapshot.data.results[index].voteAverage}',
+                    onTap: () {
+                      
+                    }
                   );
                 },
               );
@@ -85,79 +88,99 @@ String imageBaseUrl = 'https://image.tmdb.org/t/p/w500'; //sementara
       );
     }
 
-    Container moviesItem({
+    Widget moviesItem({
       String poster, 
       String title, 
       String date,
-      String voteAverage}) {
-      return Container(
-        child: Card(
-          margin: EdgeInsets.all(10),
-          child: Container(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,   //crossaxis soalnya di row pengen pindahin sumbu y biar ketengah
-              children: <Widget>[
-                Container(
-                  width: 100,
-                  child: CachedNetworkImage(
-                    imageUrl: poster,
+      String voteAverage,
+      Function onTap}) {
+      return InkWell(
+        onTap:onTap,
+              child: Container(
+          child: Card(
+            margin: EdgeInsets.all(10),
+            child: Container(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,   //crossaxis soalnya di row pengen pindahin sumbu y biar ketengah
+                children: <Widget>[
+                  Container(
+                    width: 100,
+                    child: CachedNetworkImage(
+                      imageUrl: poster,
+                    ),
                   ),
-                ),
-                SizedBox(       //Pake SizedBox soalnya di Row
-                  width: 10,
-                ),
-                Container(
-                  margin: EdgeInsets.only(
-                    top: 20,
+                  SizedBox(       //Pake SizedBox soalnya di Row
+                    width: 10,
                   ),
-                  //color: Colors.lightBlueAccent,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Text(title, 
-                          style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                      Row(
+                  Expanded(
+                    child: Container(
+                      margin: EdgeInsets.only(
+                        top: 20,
+                      ),
+                      //color: Colors.lightBlueAccent,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
-                          Icon(
-                            Icons.calendar_today,
-                            size: 12,
+                          Text(title, 
+                              style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                          Row(
+                            children: <Widget>[
+                              Icon(
+                                Icons.calendar_today,
+                                size: 12,
+                              ),
+                              SizedBox(
+                                width: 5,
+                                ),
+                              Text(date),
+                            ],
                           ),
                           SizedBox(
-                            width: 5,
+                              height: 10,
                             ),
-                          Text(date),
-                        ],
-                      ),
-                      SizedBox(
-                          height: 10,
-                        ),
-                      Row(
-                        children: <Widget>[
-                          Icon(
-                            Icons.star_border,
-                            size: 12,
+                          Row(
+                            children: <Widget>[
+                              Icon(
+                                Icons.star_border,
+                                size: 12,
+                              ),
+                              SizedBox(
+                                width: 5, //Jarak Icon sama Text Rating
+                                ),
+                              Text(voteAverage),
+                            ],
                           ),
-                          SizedBox(
-                            width: 5, //Jarak Icon sama Text Rating
-                            ),
-                          Text(voteAverage),
                         ],
                       ),
-                    ],
-                  ),
-                )
-              ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
       );
     }
+}
+
+class MovieDetail extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(    //Return untuk halaman baru pake scaffold
+      appBar: AppBar(
+        title: Text('Movie Detail'),
+      ),
+      body: Container(
+        child: Text('Detail'),
+      ),
+    );
+  }
 }
