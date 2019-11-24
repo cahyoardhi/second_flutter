@@ -3,6 +3,10 @@ import 'package:app_movies/model/popular_movies.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+
+/* Author : Gagah GK
+  Co-Author : Cahyo Ardhi Copas Doang
+*/
   void main() => runApp(MoviesApp());
 
   class MoviesApp extends StatelessWidget {
